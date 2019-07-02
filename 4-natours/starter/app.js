@@ -1,19 +1,29 @@
 const express = require('express')
-// create an instance of express
 const app = express()
 
-// GET http method and url
-app.get('/', (req, res) => {
-  // res.status(200).send('Hello from the server side')
-  // automatically sets the content type to json
-  res.status(200).json({ message: 'Hello', app: 'Natours' })
-})
+const fs = require('fs')
 
-app.post('/', (req, res) => {
-  res.send('You can post to this endpoint')
+// 2 - readFileSync
+const tours = JSON.parse(
+  fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
+)
+
+// we should always specfiy the version of the API. You can also do it in the subdomain.
+// route handler
+// tours is the resource
+app.get('/api/v1/tours', (req, res) => {
+  res.json({
+    // using jssend specification
+    status: 'success',
+    // include result number when response is an array - makes it easy for the client to get key information
+    results: tours.length,
+    // envelope for our data
+    data: { tours }
+  })
 })
 
 const port = 3000
+
 app.listen(port, () => {
   console.log(`App running on on http://localhost:${port}`)
 })
