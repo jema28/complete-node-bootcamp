@@ -96,17 +96,6 @@ const deleteTour = (req, res) => {
   })
 }
 
-app
-  .route('/api/v1/tours')
-  .get(getAllTours)
-  .post(createTour)
-
-app
-  .route('/api/v1/tours/:id')
-  .get(getTour)
-  .patch(updateTour)
-  .delete(deleteTour)
-
 const getAllUsers = (req, res) => {
   res.status(500).json({
     status: 'error',
@@ -142,13 +131,33 @@ const deleteUser = (req, res) => {
   })
 }
 
-app
-  .route('/api/v1/users')
+// this process is mounting the router - mounting a newe router on a route
+// root endpoint for sub app
+// match /api/v1/tours and run tourRouter, which has its own routes
+const tourRouter = express.Router()
+const userRouter = express.Router()
+
+app.use('/api/v1/tours', tourRouter)
+app.use('/api/v1/users', userRouter)
+
+tourRouter
+  .route('/')
+  .get(getAllTours)
+  .post(createTour)
+
+tourRouter
+  .route('/:id')
+  .get(getTour)
+  .patch(updateTour)
+  .delete(deleteTour)
+
+userRouter
+  .route('/')
   .get(getAllUsers)
   .post(createUser)
 
-app
-  .route('/api/v1/users/:id')
+userRouter
+  .route('/:id')
   .get(getUser)
   .patch(updateUser)
   .delete(deleteUser)
