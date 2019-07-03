@@ -5,8 +5,12 @@ const {
   createTour,
   getTour,
   updateTour,
-  deleteTour
+  deleteTour,
+  checkID
 } = require('../controllers/tours')
+
+// this middleware if now part of our pipeline
+router.param('id', checkID)
 
 router
   .route('/')
