@@ -3,13 +3,10 @@ const fs = require('fs')
 
 const app = express()
 
-// this returns a function that's added to the middleware stack.
 app.use(express.json())
 
-// next is the third argument of the middleware function
 app.use((req, res, next) => {
   console.log('hello from the middleware')
-  // without next, the program will be stuck in the middleware stack
   next()
 })
 
