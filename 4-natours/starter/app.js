@@ -76,14 +76,13 @@ const deleteTour = (req, res) => {
       status: 'fail',
       message: 'Invalid ID'
     })
-  } // 204 means no content / we send data null
+  }
   res.status(204).json({
     status: 'success',
     data: null
   })
 }
 
-// we can chain requests
 app
   .route('/api/v1/tours')
   .get(getAllTours)
