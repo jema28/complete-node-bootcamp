@@ -12,6 +12,7 @@ if (process.env.NODE_ENV) {
 }
 
 app.use(express.json())
+app.use(express.static(`${__dirname}/public`))
 
 // -- ROUTERS ---
 // act as sub apps to separate the routes
