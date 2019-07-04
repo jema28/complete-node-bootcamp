@@ -7,7 +7,10 @@ const userRouter = require('./routes/users')
 // --- MIDDLEWARES ---
 const app = express()
 
-app.use(morgan('dev'))
+if (process.env.NODE_ENV) {
+  app.use(morgan('dev'))
+}
+
 app.use(express.json())
 
 // -- ROUTERS ---
