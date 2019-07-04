@@ -6,16 +6,16 @@ const {
   getTour,
   updateTour,
   deleteTour,
-  checkID
+  checkID,
+  checkBody
 } = require('../controllers/tours')
 
-// this middleware if now part of our pipeline
 router.param('id', checkID)
 
 router
   .route('/')
   .get(getAllTours)
-  .post(createTour)
+  .post(checkBody, createTour)
 
 router
   .route('/:id')
