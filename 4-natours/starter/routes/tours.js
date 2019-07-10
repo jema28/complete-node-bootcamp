@@ -6,7 +6,7 @@ const {
   createTour,
   getTour,
   updateTour,
-  deleteTour,
+  deleteTour
 } = require('../controllers/tours')
 
 // router.param('id', checkID)
