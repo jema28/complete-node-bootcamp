@@ -51,13 +51,26 @@ exports.createTour = async (req, res) => {
   }
 }
 
-exports.updateTour = (req, res) => {
-  res.status(200).json({
-    status: 'success',
-    data: {
-      tour: '<Updated tour>'
-    }
-  })
+exports.updateTour = async (req, res) => {
+  try {
+    // pass in id and the data we want to change
+    const tour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
+      // the new updated document will be returned and run validators from schema again
+      new: true,
+      runValidators: true
+    })
+    res.status(200).json({
+      status: 'success',
+      data: {
+        tour
+      }
+    })
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err
+    })
+  }
 }
 
 exports.deleteTour = (req, res) => {
