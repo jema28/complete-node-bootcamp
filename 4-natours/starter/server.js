@@ -16,33 +16,6 @@ mongoose
   })
   .then(() => console.log('DB connection successful'))
 
-const tourSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    // validator
-    required: [true, 'Name is required'],
-    unique: true
-  },
-  rating: Number,
-  price: {
-    type: Number,
-    require: [true, 'A tour must have a price']
-  }
-})
-
-// convention of using model names and variables
-const Tour = mongoose.model('Tour', tourSchema)
-
-const testTour = new Tour({
-  name: 'The Park Camper',
-  price: 997
-})
-
-testTour
-  .save()
-  .then(document => console.log(document))
-  .catch(error => console.log(error))
-
 const port = process.env.PORT || 3000
 
 app.listen(port, () => {
