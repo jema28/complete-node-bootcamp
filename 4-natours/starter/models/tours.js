@@ -56,7 +56,6 @@ const tourSchema = new mongoose.Schema(
     startDates: [Date]
   },
   {
-    // schema options
     toJSON: { virtuals: true },
     toObject: { virtuals: true }
   }
@@ -66,23 +65,10 @@ tourSchema.virtual('durationWeeks').get(function() {
   return this.duration / 7
 })
 
-// document middleware: runs before .save() and .create()
-// this doesn't work on insertMany or findOne or update
-// this is called a pre save hook
 tourSchema.pre('save', function(next) {
   this.slug = slugify(this.name, { lower: true })
   next()
 })
-
-// tourSchema.pre('save', function() {
-//   console.log('Will save document...')
-//   next()
-// })
-
-// tourSchema.post('save', function(document, next) {
-//   console.log(document)
-//   next()
-// })
 
 const Tour = mongoose.model('Tour', tourSchema)
 
