@@ -17,7 +17,6 @@ app.use(express.json())
 app.use(express.static(`${__dirname}/public`))
 
 // -- ROUTERS ---
-// act as sub apps to separate the routes
 app.use('/api/v1/tours', tourRouter)
 app.use('/api/v1/users', userRouter)
 

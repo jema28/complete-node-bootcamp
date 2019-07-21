@@ -10,7 +10,6 @@ const tourSchema = new mongoose.Schema(
       trim: true,
       maxlength: [40, 'A tour name must have less or equal than 40 characters'],
       minlength: [10, 'A tour name must have more or equal than 10 characters']
-      // validate: [isAlpha, 'Tour name must only contain characters']
     },
     slug: String,
     duration: {
@@ -47,7 +46,6 @@ const tourSchema = new mongoose.Schema(
       type: Number,
       validate: {
         validator: function(value) {
-          // this function has access to the value that was inputted.
           return value < this.price // 100 < 200
         },
         message: 'Discount price ({VALUE}) should be below regular price'
@@ -101,6 +99,7 @@ tourSchema.pre(/^find/, function(next) {
 })
 
 tourSchema.post(/^find/, function(documents, next) {
+  // eslint-disable-next-line no-console
   console.log(`Query took ${Date.now() - this.start} milliseconds!`)
   next()
 })

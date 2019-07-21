@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 const mongoose = require('mongoose')
 const fs = require('fs')
 const env = require('dotenv')
