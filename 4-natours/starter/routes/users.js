@@ -1,6 +1,4 @@
 const express = require('express')
-
-const router = express.Router()
 const {
   getAllUsers,
   createUser,
@@ -8,6 +6,11 @@ const {
   updateUser,
   deleteUser
 } = require('../controllers/users')
+const { signup } = require('../controllers/auth')
+
+const router = express.Router()
+
+router.post('/signup', signup)
 
 router
   .route('/')
