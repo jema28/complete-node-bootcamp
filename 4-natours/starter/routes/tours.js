@@ -11,6 +11,7 @@ const {
   getTourStats,
   getMonthlyPlan
 } = require('../controllers/tours')
+const { protect } = require('../controllers/auth')
 
 // router.param('id', checkID)
 
@@ -20,7 +21,7 @@ router.route('/monthly-plan/:year').get(getMonthlyPlan)
 
 router
   .route('/')
-  .get(getAllTours)
+  .get(protect, getAllTours)
   .post(createTour)
 
 router
