@@ -41,7 +41,7 @@ const handleValidationErrorDB = err => {
 }
 
 module.exports = (err, req, res, next) => {
-  err.statusCode = err.statqusCode || 500
+  err.statusCode = err.statusCode || 500
   err.status = err.status || 'error'
 
   if (process.env.NODE_ENV === 'development') {
