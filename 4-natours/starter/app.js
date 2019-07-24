@@ -41,6 +41,20 @@ app.use(mongoSanitise())
 // stops you adding html code / converts html entities
 app.use(xss())
 
+// Prevent parameter pollution
+app.use(
+  hpp({
+    whitelist: [
+      'duration',
+      'ratingsQuantity',
+      'ratingsAverage',
+      'maxGroupSize',
+      'difficulty',
+      'price'
+    ]
+  })
+)
+
 // Serving static files
 app.use(express.static(`${__dirname}/public`))
 
