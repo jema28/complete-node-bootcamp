@@ -25,6 +25,7 @@ router.patch('/reset-password/:token', resetPassword)
 router.patch('/reset-password/:token', resetPassword)
 router.patch('/update-password', protect, updatePassword)
 router.patch('/update-data', protect, updateData)
+router.delete('/delete', protect, deleteUser)
 
 router
   .route('/')
@@ -35,6 +36,5 @@ router
   .route('/:id')
   .get(getUser)
   .patch(updateUser)
-  .delete(deleteUser)
 
 module.exports = router
