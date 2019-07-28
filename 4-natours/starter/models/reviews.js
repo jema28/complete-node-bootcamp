@@ -33,4 +33,16 @@ const reviewSchema = new mongoose.Schema(
 )
 
 const Review = mongoose.model('Review', reviewSchema)
+
+reviewSchema.pre(/^find/, function(next) {
+  this.populate({
+    path: 'tour',
+    select: 'name'
+  }).populate({
+    path: 'user',
+    select: 'name photo'
+  })
+  next()
+})
+
 module.exports = Review

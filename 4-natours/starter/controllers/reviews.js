@@ -9,7 +9,6 @@ exports.getAllReviews = catchAsync(async (req, res, next) => {
     results: reviews.length,
     data: { reviews }
   })
-  next()
 })
 
 exports.createReview = catchAsync(async (req, res, next) => {
